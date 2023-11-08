@@ -137,10 +137,16 @@ int insertSort(position p, int koef, int eksp) {
             temp = temp->next;
         }
         if (temp->next != NULL && temp->next->eksp == eksp) {
-            if (temp->next->koef == -koef)
+            if (temp->next->koef == -koef) {
+
+            
                 deleteAfter(temp);
-            else
+                free(new);
+            }
+            else {      
                 temp->next->koef += koef;
+                free(new);
+            }
         }
 
         else {
