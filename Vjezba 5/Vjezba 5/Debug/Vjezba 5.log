@@ -1,0 +1,18 @@
+﻿  zadatak.c
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(78,15): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(111,34): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(154,17): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(182,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(183,43): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(189,11): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(202,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(203,43): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(214,11): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(227,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(228,43): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(234,11): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(247,39): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(248,43): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(254,11): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+C:\Users\denis\source\repos\Vjezba 5\Vjezba 5\zadatak.c(163): warning C4715: 'unos': not all control paths return a value
+  Vjezba 5.vcxproj -> C:\Users\denis\source\repos\Vjezba 5\Debug\Vjezba 5.exe
