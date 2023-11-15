@@ -1,6 +1,6 @@
-/*4. Napisati program za zbrajanje i mnoûenje polinoma. Koeficijenti i eksponenti se
-Ëitaju iz datoteke.
-Napomena: Eksponenti u datoteci nisu nuûno sortirani.*/
+Ôªø/*4. Napisati program za zbrajanje i mno≈æenje polinoma. Koeficijenti i eksponenti se
+ƒçitaju iz datoteke.
+Napomena: Eksponenti u datoteci nisu nu≈æno sortirani.*/
 
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
@@ -24,38 +24,65 @@ typedef struct _polinom {
 }polinom;
 
 
-int readFromFile(position p, char* fileName);
+int readFromFile(position p1, position p2, char* fileName);
 position createNewPoli(int koef, int eksp);
 int insertSort(position p, int koef, int eksp);
 int insertAfter(position p, position q);
 int printPoliList(position p);
+int polyAdd(position add, position p1, position p2);
 int deleteAfter(position p);
-int Delete(position p);
+int polyMult(position multy, position p1, position p2);
 
 int main(void) {
 
-    polinom Poly = { .koef = 0, .eksp = {0}, .next = NULL };
+    polinom p1 = { .koef = 0, .eksp = {0}, .next = NULL };
+    polinom p2 = { .koef = 0, .eksp = {0}, .next = NULL };
+    polinom resAdd = { .koef = 0, .eksp = {0}, .next = NULL };
+    polinom resMult = { .koef = 0, .eksp = {0}, .next = NULL };
+
     char fileName[MAX_FILE_NAME] = { 0 };
 
     printf("Type in file name: ");
     scanf(" %s", fileName);
-    readFromFile(&Poly, fileName);
+    readFromFile(&p1, &p2, fileName);
+
     printf("Polinom 1: ");
-    printPoliList(Poly.next);
+    printPoliList(p1.next);
+    printf("Polinom 2: ");
+    printPoliList(p2.next);
+
+    polyAdd(&resAdd, &p1, &p2);
+    printf("Result of add function: ");
+    printPoliList(resAdd.next);
+
+    polyMult(&resMult, &p1, &p2);
+    printf("Result of multyply function: ");
+    printPoliList(resMult.next);
+
     printf("==================================\n");
-    if (Delete(Poly.next) == 0) {
+    if (Delete(p1.next) == 0) {
         printf("Successful memory cleaning p1!");
         printf("\n");
     }
-
-
+    if (Delete(p2.next) == 0) {
+        printf("Successful memory cleaning p2!");
+        printf("\n");
+    }
+    if (Delete(resAdd.next) == 0) {
+        printf("Successful memory cleaning resAdd!");
+        printf("\n");
+    }
+    if (Delete(resMult.next) == 0) {
+        printf("Successful memory cleaning resMult!");
+        printf("\n");
+    }
 
     return EXIT_SUCCESS;
 }
 
 
 
-int readFromFile(position p, char* fileName) {
+int readFromFile(position p1, position p2, char* fileName) {
 
     FILE* fp = NULL;
     fp = fopen(fileName, "r");
@@ -71,6 +98,7 @@ int readFromFile(position p, char* fileName) {
     int koef = 0;
     int eksp = 0;
     int n = 0;
+    int counter = 1;
 
     while (!feof(fp)) {
 
@@ -79,13 +107,18 @@ int readFromFile(position p, char* fileName) {
         while (strlen(ptr) > 0)
         {
             sscanf(ptr, "%d %d %n", &koef, &eksp, &n);
-
-            if (koef != 0)
-                insertSort(p, koef, eksp);
-
+            if (counter == 1) {
+                if (koef != 0)
+                    insertSort(p1, koef, eksp);
+            }
+            else if (counter == 2) {
+                if (koef != 0)
+                    insertSort(p2, koef, eksp);
+            }
             ptr += n;
 
         }
+        counter++;
     }
     fclose(fp);
 
@@ -120,16 +153,14 @@ int insertSort(position p, int koef, int eksp) {
         return MEMORY_NOT_ALLOCATED_CORRECT;
     }
 
-    //Add if its the first element being added or if its exponent is the smallest
     if (p == NULL || eksp < p->eksp) {
         new->next = p;
         p = new;
     }
-    //else go until you find the right spot for it
+
     else {
 
         position temp = p;
-        //loop until we get to the last element of an element 
         while (temp->next != NULL && temp->next->eksp < eksp) {
             if (temp->next->koef == 0) {
                 deleteAfter(temp);
@@ -137,16 +168,10 @@ int insertSort(position p, int koef, int eksp) {
             temp = temp->next;
         }
         if (temp->next != NULL && temp->next->eksp == eksp) {
-            if (temp->next->koef == -koef) {
-
-            
+            if (temp->next->koef == -koef)
                 deleteAfter(temp);
-                free(new);
-            }
-            else {      
+            else
                 temp->next->koef += koef;
-                free(new);
-            }
         }
 
         else {
@@ -197,6 +222,72 @@ int deleteAfter(position p) {
     toDel = p->next;
     p->next = p->next->next;
     free(toDel);
+
+    return EXIT_SUCCESS;
+}
+
+
+
+int polyAdd(position add, position p1, position p2)
+{
+    position pt1 = p1->next;
+    position pt2 = p2->next;
+
+
+    while (pt1 != NULL && pt2 != NULL) {
+
+        if (pt1->eksp == pt2->eksp) {
+            insertSort(add, pt1->koef + pt2->koef, pt1->eksp);
+            pt1 = pt1->next;
+            pt2 = pt2->next;
+        }
+
+        else if (pt1->eksp > pt2->eksp) {
+            insertSort(add, pt1->koef, pt1->eksp);
+            pt1 = pt1->next;
+        }
+
+        else if (pt1->eksp < pt2->eksp) {
+            insertSort(add, pt2->koef, pt2->eksp);
+            pt2 = pt2->next;
+        }
+
+    }
+    while (pt1 != NULL) {
+        insertSort(add, pt1->koef, pt1->eksp);
+        pt1 = pt1->next;
+    }
+    while (pt2 != NULL) {
+        insertSort(add, pt2->koef, pt2->eksp);
+        pt2 = pt2->next;
+    }
+
+
+
+    return EXIT_SUCCESS;
+}
+
+int polyMult(position multy, position p1, position p2)
+{
+    position i = NULL;
+    position j = NULL;
+
+    int koeficijent = 0;
+    int eksponent = 0;
+
+    if (p1->next == NULL || p2->next == NULL)
+        return EXIT_SUCCESS;
+
+    for (i = p1->next; i != NULL; i = i->next) {
+        for (j = p2->next; j != NULL; j = j->next)
+        {
+            koeficijent = i->koef * j->koef;
+            eksponent = i->eksp + j->eksp;
+
+            insertSort(multy, koeficijent, eksponent);
+
+        }
+    }
 
     return EXIT_SUCCESS;
 }
