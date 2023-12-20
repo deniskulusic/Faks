@@ -1,0 +1,6 @@
+﻿  zadatak.c
+C:\Users\denis\source\repos\Vjezba8\Vjezba8\zadatak.c(30,18): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\denis\source\repos\Vjezba8\Vjezba8\zadatak.c(65,19): warning C4013: 'strcmp' undefined; assuming extern returning int
+C:\Users\denis\source\repos\Vjezba8\Vjezba8\zadatak.c(170,9): warning C4033: 'levelOrder' must return a value
+C:\Users\denis\source\repos\Vjezba8\Vjezba8\zadatak.c(189): warning C4715: 'levelOrder': not all control paths return a value
+  Vjezba8.vcxproj -> C:\Users\denis\source\repos\Vjezba8\Debug\Vjezba8.exe
